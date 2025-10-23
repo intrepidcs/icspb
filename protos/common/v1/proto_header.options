@@ -1,0 +1,3 @@
+# nanopb options for proto_header.proto
+
+common.v1.AuthMdSha256.HMAC fixed_length:true, max_size:32

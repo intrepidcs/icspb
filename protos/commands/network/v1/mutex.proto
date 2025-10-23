@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package commands.network.v1;
+
+import "commands/network/v1/networks.proto";
+
+enum MutexType {
+    Shared = 0;
+    TxExclusive = 1;
+    ExternalExclusive = 2;
+    FullyExclusive = 3;
+}
+
+enum MutexEvent {
+    Released = 0;
+    Expired = 1;
+    Preempted = 2;
+    Queued = 3;
+    Acquired = 4;
+}
+
+message NetworkMutex {
+    // The network ID that this mutex acts upon
+    repeated network.v1.NetworkId network_ids = 1;
+    // The client id of the mutex holder. On initial acquisition, this id is assigned by the device
+    optional uint32 client_id = 2;
+    // the priority value for the mutex. 0-31 are not preemptable, higher value = lower priority
+    optional uint32 priority = 3;
+    // the time to live in milliseconds before the mutex is automatically released
+    optional uint32 ttl = 4;
+    // The requested or actual type of the mutex.
+    optional MutexType type = 5;
+    // Boolean to indicate if the request is global (all networks)
+    optional bool global = 6;
+    // Boolean to indicate if this is a request to release the mutex
+    optional bool release = 7;
+    // The event that occurred 
+    optional MutexEvent event = 8;
+}

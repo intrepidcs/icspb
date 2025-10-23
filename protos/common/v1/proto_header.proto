@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package common.v1;
+
+enum ProtoId {
+	PROTO_ID_UNSPECIFIED = 0;
+	PROTO_ID_MFG_CONFIG = 1;
+	PROTO_ID_CPU_ID = 2;
+	PROTO_ID_NETWORK_MUTEX = 3;
+	PROTO_ID_GET_CLIENT_ID = 4;
+}
+
+enum ApiCommand {
+	PROTO_API_CMD_UNSPECIFIED = 0;
+	// request for the specified message
+	PROTO_API_CMD_GET = 1;
+	// full update to the specified message
+	PROTO_API_CMD_PUT = 2;
+	// update only present fields
+	PROTO_API_CMD_PATCH = 3;
+}
+
+enum AuthMethod {
+	PROTO_API_AUTH_UNSPECIFIED = 0;
+	// not authorized (unspecified is ok too)
+	PROTO_API_AUTH_NONE = 1;
+	PROTO_API_AUTH_MD_SHA256 = 2;
+}
+
+message AuthMdSha256 {
+	bytes HMAC = 1;
+}
+
+// ProtoHeader contains details about the protobuf that directly follows this message in stream or flash
+message ProtoHeader {
+	// identification
+	common.v1.ProtoId proto_id = 1;
+	// version number of the schema
+	uint32 version = 2;
+	// intent of the frame
+	optional common.v1.ApiCommand api_command = 3;
+	// packet is authenticated
+	optional common.v1.AuthMethod auth_method = 4;
+}

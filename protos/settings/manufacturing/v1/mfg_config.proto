@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package settings.manufacturing.v1;
+
+import "settings/common/v1/types.proto";
+
+message MfgConfig {
+	// device serial number
+	optional uint64 serial_number = 1;
+	// date of manufacture
+	common.v1.MfgDate manufacture_date = 2;
+	// hardware revision
+	common.v1.VersionNumber hardware_rev = 3;
+	// product id
+	optional common.v1.ProductId product_id = 4;
+	// bootloader version
+	common.v1.VersionNumber bootloader_rev = 5;
+	// usb descriptor serial number string
+	optional string usb_descriptor = 6;
+	// array of mac addresses
+	repeated common.v1.MacAddr mac_addresses = 7;
+	// PCB serial number
+	common.v1.PcbSerial pcb_serial = 8;
+	// chip id for iefs
+	optional common.v1.ChipId chip_id = 9;
+	// some devices have an IMEI for a modem
+	optional fixed64 imei = 10;
+	// some products may contain other products
+	optional common.v1.ProductId parent_product_id = 11;
+	// Software version lock
+	optional common.v1.VersionNumber software_version_lock = 12;
+}

@@ -1,0 +1,4 @@
+# nanopb options for mfg_config.proto
+
+settings.manufacturing.v1.MfgConfig.usb_descriptor max_length:31
+settings.manufacturing.v1.MfgConfig.mac_addresses max_count:32

@@ -1,0 +1,6 @@
+{
+  "proto_src_dir": "../protos",
+  "output_dir": "../dist/nanopb",
+  "nanopb_path": "../../../fwLib/third-party/nanopb/generator/nanopb_generator.py",
+  "python_executable": "python"
+}

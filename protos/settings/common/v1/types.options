@@ -1,0 +1,4 @@
+# nanopb options for types.proto
+
+settings.common.v1.MacAddr.mac_addr max_size:6 fixed_length:true
+settings.common.v1.PcbSerial.pcb_serial max_length:16 fixed_length:true
